@@ -33,12 +33,15 @@
 \ProcessOptions\relax
 
 % Load class options
-\LoadClass[12pt,a4paper, oneside]{article}
+\LoadClass[12pt, a4paper, oneside]{article}
 
 %-------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %-------------------------------------------------------------------------------
-
+\renewcommand{\familydefault}{\sfdefault}
+%\usepackage[T1]{fontenc} % T1 encoded CM-fonts, requires synaptic package cm-super!
+%\usepackage{helvet} Helvetica (Arial) type font
+%\usepackage{avant} alternative sans serif font
 \usepackage[numbers,sort&compress]{natbib}\citeindextrue % Round brackets around citations, change to square for square brackets
 \usepackage{graphicx} % Required to include images
 \usepackage{amsmath,amssymb,theorem} % Math packages
