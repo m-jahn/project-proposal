@@ -38,10 +38,11 @@
 %-------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
 %-------------------------------------------------------------------------------
-\renewcommand{\familydefault}{\sfdefault}
-%\usepackage[T1]{fontenc} % T1 encoded CM-fonts, requires synaptic package cm-super!
+\usepackage[sfdefault,light]{roboto} % requires package texlive-fonts-extra
 %\usepackage{helvet} Helvetica (Arial) type font
 %\usepackage{avant} alternative sans serif font
+\usepackage[T1]{fontenc} % T1 encoded Computer Modern-fonts, requires synaptic package cm-super
+
 \usepackage[numbers,sort&compress]{natbib}\citeindextrue % Round brackets around citations, change to square for square brackets
 \usepackage{graphicx} % Required to include images
 \usepackage{amsmath,amssymb,theorem} % Math packages
@@ -101,7 +102,8 @@
 not set. Please fix this.}
 
 % Colors
-\definecolor{hbrs}{RGB}{1,106,186}
+\definecolor{blue_headline}{RGB}{1,106,186} % light blue
+\definecolor{green_headline}{RGB}{89,178,70} % light green
 
 \definecolor{keywords}{RGB}{0,100,0}
 \definecolor{comments}{RGB}{0,100,50}
@@ -219,8 +221,8 @@ Supervised by\par
 %\pagestyle{mainmatter}
 
 %% Print the current chapter and section at the top of the page in cyan.
-% \renewcommand*\chaptermark[1]{\markboth{\textcolor{hbrs} {\thechapter.\ } #1}{}}
-% \renewcommand*\sectionmark[1]{\markright{\textcolor{hbrs}{\thesection.\ } #1}}
+% \renewcommand*\chaptermark[1]{\markboth{\textcolor{green_headline} {\thechapter.\ } #1}{}}
+% \renewcommand*\sectionmark[1]{\markright{\textcolor{green_headline}{\thesection.\ } #1}}
 
 %% Chapter titles have the same layout as parts.
 % \titleformat{\chapter}
@@ -254,10 +256,10 @@ Supervised by\par
 %     {\bfseries\large\thesubsection.~}%before code
 
 \usepackage{sectsty}
-\chapterfont{\color{hbrs}}
-\sectionfont{\color{hbrs}}
-\subsectionfont{\color{hbrs}}
-\subsubsectionfont{\color{hbrs}}
+\chapterfont{\color{green_headline}}
+\sectionfont{\color{green_headline}}
+\subsectionfont{\color{green_headline}}
+\subsubsectionfont{\color{green_headline}}
 
 % \titleformat{\section}
 %   [block]
