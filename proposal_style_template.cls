@@ -1,5 +1,5 @@
 %
-% LaTeX2e Style for MAS R&D and master thesis reports
+% LaTeX2e Style for master thesis or project proposals
 % Author: Argentina Ortega Sainz, Hochschule Bonn-Rhein-Sieg, Germany
 % Please feel free to send issues, suggestions or pull requests to:
 % https://github.com/mas-group/report-template
@@ -7,12 +7,20 @@
 %
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mas_proposal}[2018/01/25 The MAS report class]
+\ProvidesClass{proposal_style_template}[Proposal class]
 
-% \newcommand{\test}{Project test!}
 \RequirePackage{xcolor}
 \RequirePackage{ifthen}
+
+% Colors
 \definecolor{slcolor}{HTML}{882B21}
+\definecolor{blue_headline}{RGB}{1,106,186} % light blue
+\definecolor{green_headline}{RGB}{89,178,70} % light green
+\definecolor{keywords}{RGB}{0,100,0}
+\definecolor{comments}{RGB}{0,100,50}
+\definecolor{stringred}{RGB}{160,0,0}
+\definecolor{codeblue}{RGB}{0,0,150}
+
 \newcommand*{\project}[1]{\gdef\@project{#1}%
 }
 \newcommand*{\@project}{\texttt{project} not set. Please select Master Thesis or R\&D Project}
@@ -20,8 +28,8 @@
 
 % Options
 \DeclareOption{onecolumn}{\OptionNotUsed}
-\DeclareOption{thesis}{\project{Master Thesis Proposal}}
-\DeclareOption{rnd}{\project{R\&D Project Proposal}}
+\DeclareOption{thesis}{\project{Master Thesis}}
+\DeclareOption{rnd}{\project{Proposal}}
 
 % Report options
 % \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
@@ -33,7 +41,7 @@
 \ProcessOptions\relax
 
 % Load class options
-\LoadClass[12pt, a4paper, oneside]{article}
+\LoadClass[11pt, a4paper, oneside]{article}
 
 %-------------------------------------------------------------------------------
 %	VARIOUS REQUIRED PACKAGES AND CONFIGURATIONS
@@ -41,35 +49,35 @@
 \usepackage[sfdefault,light]{roboto} % requires package texlive-fonts-extra
 %\usepackage{helvet} Helvetica (Arial) type font
 %\usepackage{avant} alternative sans serif font
-\usepackage[T1]{fontenc} % T1 encoded Computer Modern-fonts, requires synaptic package cm-super
-
-\usepackage[numbers,sort&compress]{natbib}\citeindextrue % Round brackets around citations, change to square for square brackets
+%\usepackage[T1]{fontenc} % T1 encoded Computer Modern-fonts, requires synaptic package cm-super
+\usepackage[numbers,sort&compress]{natbib}
+%\citeindextrue % Round brackets around citations, change to square for square brackets
 \usepackage{graphicx} % Required to include images
 \usepackage{amsmath,amssymb,theorem} % Math packages
 \usepackage{listings} % Required for including snippets of code
 \usepackage{booktabs} % Required for better horizontal rules in tables
-% \usepackage{xspace} % Provides the ability to use an intelligent space which is used in \institution and \department
+% \usepackage{xspace} % Provides the ability to use an intelligent space
 % \usepackage[printonlyused,withpage]{acronym} % Include a list of acronyms
 % \usepackage[acronym, toc]{glossaries}%Better package for acronyms
 % \usepackage{rotating} % Allows tables and figures to be rotated
-% \usepackage[xetex]{hyperref} % Required for links and changing link options
+\usepackage[colorlinks=true, allcolors=blue_headline]{hyperref} % Required for links and changing link options
 \usepackage{microtype} % Slightly tweak font spacing for aesthetics
 % \usepackage{algorithm}
 % \usepackage[noend]{algpseudocode}
-% \usepackage{caption}
-% %\captionsetup{belowskip=6pt,aboveskip=6pt}
+\usepackage[font=small,labelfont=bf]{caption}
+% \captionsetup{belowskip=6pt,aboveskip=6pt}
 % \usepackage{footnote}
-% % \usepackage{minipage-marginpar}
+% \usepackage{minipage-marginpar}
 % \makesavenoteenv{tabular}
 % \makesavenoteenv{table}
 % \usepackage[flushleft]{threeparttable}
-% % \usepackage{subcaption}
+% \usepackage{subcaption}
 % \usepackage[section]{placeins}
 % \usepackage{lastpage}
 % \usepackage[small, md, sc]{titlesec}
-%\usepackage{inputenc}
-\usepackage{geometry}
-% %\usepackage{tocloft}
+% \usepackage{inputenc}
+\usepackage[margin=1.2in]{geometry}
+% \usepackage{tocloft}
 % \usepackage{adjustbox} % to limit size of tables
 % \usepackage{pbox}
 \usepackage[titletoc]{appendix}
@@ -79,9 +87,23 @@
 % \usepackage{tocloft} % Add the word appendix to the TOC
 \usepackage{setspace}
 \usepackage{url}
-\usepackage{lipsum} % Used to test
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{upgreek}
 
+% Text spacing and margins
+% line spacing
 \onehalfspacing
+% space between paragraphs
+\usepackage{parskip}
+% indention at beginning of paragraph, not necesary when parskip
+% package is used
+%\setlength{\parindent}{0pt}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Fonts
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -91,24 +113,13 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \renewcommand\bibname{References} %Change Bibliography to References
-
-
-\newcommand{\thirdpartylogo}[1]{\def\@thirdpartylogo{#1}}
-\thirdpartylogo{}
-
-\newcommand*{\supervisors}[1]{\gdef\@supervisors{#1}%
-}
-\newcommand*{\@supervisors}{\texttt{\string\supervisors} currently
-not set. Please fix this.}
-
-% Colors
-\definecolor{blue_headline}{RGB}{1,106,186} % light blue
-\definecolor{green_headline}{RGB}{89,178,70} % light green
-
-\definecolor{keywords}{RGB}{0,100,0}
-\definecolor{comments}{RGB}{0,100,50}
-\definecolor{stringred}{RGB}{160,0,0}
-\definecolor{codeblue}{RGB}{0,0,150}
+\newcommand{\centerlogo}[1]{\def\@centerlogo{#1}}
+\newcommand{\rightlogo}[1]{\def\@rightlogo{#1}}
+\newcommand{\leftlogo}[1]{\def\@leftlogo{#1}}
+\newcommand*{\institution}[1]{\gdef\@institution{#1}}
+%\newcommand*{\@supervisors}{\texttt{\string\supervisors} currently
+%not set. Please fix this.}
+\newcommand*{\subtitle}[1]{\gdef\@subtitle{#1}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Title page
@@ -119,23 +130,30 @@ not set. Please fix this.}
 
 \begin{minipage}{0.475\textwidth}
     \centering
-	\includegraphics[height=1.3cm]{images/Logo-HBRS-cyan.png}
+    \ifx\@rightlogo\@empty
+    \relax
+    \else
+	\includegraphics[width=3.5cm]{\@rightlogo}
+	\fi
 \end{minipage}
 \begin{minipage}{0.475\textwidth}
     \centering
-    \includegraphics[height=1.3cm]{images/b-it.pdf}
+    \ifx\@leftlogo\@empty
+    \relax
+    \else
+    \includegraphics[width=3.5cm]{\@leftlogo}
+    \fi
 \end{minipage}
-\ifx\@thirdpartylogo\@empty
+\ifx\@centerlogo\@empty
   \relax
 \else
 \centering
 \vfill
 \begin{minipage}{0.4\textwidth}
     \centering
-    \includegraphics[height=1.3cm]{\@thirdpartylogo}
+    \includegraphics[width=3.5cm]{\@centerlogo}
 \end{minipage}
-
-\fi%
+\fi
 
 
 \vfill
@@ -144,18 +162,15 @@ not set. Please fix this.}
 {\Large\@project\unskip\strut\par}
 \vspace{1.5cm}
 {\huge\bfseries\@title\unskip\strut\par}
+\vspace{0.5cm}
+{\large\@subtitle\unskip\strut\par}
 \vspace{2cm}
 {\Large\itshape\@author\unskip\strut\par}
 \vfill
-
-
-Supervised by\par
 \vskip 8pt
 {\large
-\@supervisors\unskip\strut\par
-}% \ifcsname @supervisors\endcsname
-% \\ \@supervisors \fi \\
-% \vfill
+\@institution\unskip\strut\par
+}
 
 \vfill
 
@@ -221,8 +236,8 @@ Supervised by\par
 %\pagestyle{mainmatter}
 
 %% Print the current chapter and section at the top of the page in cyan.
-% \renewcommand*\chaptermark[1]{\markboth{\textcolor{green_headline} {\thechapter.\ } #1}{}}
-% \renewcommand*\sectionmark[1]{\markright{\textcolor{green_headline}{\thesection.\ } #1}}
+% \renewcommand*\chaptermark[1]{\markboth{\textcolor{blue_headline} {\thechapter.\ } #1}{}}
+% \renewcommand*\sectionmark[1]{\markright{\textcolor{blue_headline}{\thesection.\ } #1}}
 
 %% Chapter titles have the same layout as parts.
 % \titleformat{\chapter}
@@ -255,11 +270,15 @@ Supervised by\par
 %     {0pt}%sep
 %     {\bfseries\large\thesubsection.~}%before code
 
+
+% change headline style: color, enumeration depth
 \usepackage{sectsty}
-\chapterfont{\color{green_headline}}
-\sectionfont{\color{green_headline}}
-\subsectionfont{\color{green_headline}}
-\subsubsectionfont{\color{green_headline}}
+\chapterfont{\color{blue_headline}}
+\sectionfont{\color{blue_headline}}
+\subsectionfont{\color{blue_headline}}
+\subsubsectionfont{\color{blue_headline}}
+\paragraphfont{\color{blue_headline}}
+\setcounter{secnumdepth}{4}
 
 % \titleformat{\section}
 %   [block]
